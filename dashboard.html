@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="glass-card dashboard-card">
+        <div class="header">
+            <div>
+                <h2>User Dashboard</h2>
+                <p class="welcome-text">Welcome, <span id="usernameDisplay">User</span></p>
+            </div>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+
+        <div class="content-grid">
+            <div class="stat-card">
+                <h3>My Profile</h3>
+                <p>Status: Active</p>
+            </div>
+            <div class="stat-card">
+                <h3>Notifications</h3>
+                <div class="stat-number">3</div>
+            </div>
+            <div class="stat-card">
+                <h3>Messages</h3>
+                <div class="stat-number">12</div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Check auth on load
+        fetch('/api/auth/me')
+            .then(res => {
+                if (!res.ok) window.location.href = '/';
+                return res.json();
+            })
+            .then(data => {
+                document.getElementById('usernameDisplay').innerText = data.user.username;
+            });
+    </script>
+</body>
+
+</html>
